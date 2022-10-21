@@ -36,7 +36,7 @@ void pieChartWidget::paintEvent(QPaintEvent *ev)
 
 
     QColor color;
-    QList<int> percentage;
+    QList<QString> percentage;
 
     QColor myPalette[5] = {Qt::red, Qt::blue, Qt::black, Qt::magenta, Qt::cyan};
 
@@ -52,9 +52,9 @@ void pieChartWidget::paintEvent(QPaintEvent *ev)
             //calculate the angle with respect to the percentage
             float angleOfpie = (hobbyRatings.value(i)/additionOfAllRatings) * 360 * 16;
 
-            int pb = (hobbyRatings.value(i)/additionOfAllRatings) * 100;
+            QString pb = (QString::number) ((hobbyRatings.value(i)/additionOfAllRatings) * 100) ;
 
-            percentage.append(pb);
+            percentage.append(  pb);
 
             color = myPalette[i];
 
@@ -82,7 +82,7 @@ void pieChartWidget::paintEvent(QPaintEvent *ev)
     qDebug() << percentage;
     for (int i = 0; i < data.count() ; i++) {
         QLabel *l = new QLabel(this);
-        l->setText(hobbyNames[i] + ": " +correspondingColor[i]+ " ("+((hobbyRatings.value(i)/additionOfAllRatings) * 100)+"%)" );
+        l->setText(hobbyNames[i] + ": " +correspondingColor[i]+ " ("+percentage[i]+"%)" );
         l->setStyleSheet("QLabel{color: "+correspondingColor[i]+"; } ");
         layout->addWidget(l);
     }
